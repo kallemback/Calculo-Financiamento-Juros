@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>calculo de venda com juntos</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        window.onload =function(){
+            document.getElementById('botao') .onclick = function(){ 
+                calcular();
+            }
+        }
+
+        function calcular(){
+            var elementos_valor = document.getElementById('txtvalor');
+            var elementos_parcela = document.getElementById('txtparcelas');
+            var elementos_resposta = document.getElementById('txtresult');
+
+            var valorcompra = parseFloat(elementos_valor.value);
+            var qtdparcelas = parseInt(elementos_parcela.value);
+
+            var msg = "";
+            var valorfinal = 0;
+            var cor="";
+
+        if(qtdparcelas == 1){
+            valorfinal = valorcompra;
+            msg='1x' + valorfinal;
+            cor='#16c4f8';
+
+        }else if(qtdparcelas == 2){
+            valorfinal = (valorcompra + (valorcompra * 0.03))/2;
+            msg='2x' + valorfinal;
+            cor='#f87504';
+            
+        }else {
+            valorfinal = (valorcompra + (valorcompra * 0.07))/4;
+            msg='4x' + valorfinal;
+            cor='#d93c3c';
+        }    
+
+        elementos_valor.value='';
+        elementos_resposta.value = msg;
+        elementos_resposta.style.backgroundColor = cor;
+        
+    }
+</script>
+</head>
+<body>
+    <form>
+        Valor da compra:
+        <input type="text" name="txtvalor" id="txtvalor"><br><br>
+        Parcelas:
+        <select name="txtparcelas" id="txtparcelas">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">4</option>
+        </select>
+        <br><br>
+        Valor das parcelas:
+        <input type="text" name="txtresult" id="txtresult" readonly><br><br>
+        <input type="button" value="Calcular" id="botao">
+    </form>
+</body>
+</html>
